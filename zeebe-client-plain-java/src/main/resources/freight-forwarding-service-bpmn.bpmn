@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="8e97625" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0" camunda:diagramRelationId="cd9a01b4-a2c9-402f-99af-25956ba05649">
+  <bpmn:process id="Process_ae0d89a6-5588-4847-9e08-db064f21a39e" name="Freight Forwarding Service" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0zqh3fu</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_13bol5l">
+      <bpmn:incoming>Flow_169hh21</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0zqh3fu" sourceRef="StartEvent_1" targetRef="Activity_0klbspf" />
+    <bpmn:sequenceFlow id="Flow_169hh21" sourceRef="Activity_0klbspf" targetRef="Event_13bol5l" />
+    <bpmn:serviceTask id="Activity_0klbspf" name="Ship">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="ship" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0zqh3fu</bpmn:incoming>
+      <bpmn:outgoing>Flow_169hh21</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_ae0d89a6-5588-4847-9e08-db064f21a39e">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="100" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13bol5l_di" bpmnElement="Event_13bol5l">
+        <dc:Bounds x="402" y="100" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00tl78s_di" bpmnElement="Activity_0klbspf">
+        <dc:Bounds x="230" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0zqh3fu_di" bpmnElement="Flow_0zqh3fu">
+        <di:waypoint x="186" y="118" />
+        <di:waypoint x="230" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_169hh21_di" bpmnElement="Flow_169hh21">
+        <di:waypoint x="330" y="118" />
+        <di:waypoint x="402" y="118" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

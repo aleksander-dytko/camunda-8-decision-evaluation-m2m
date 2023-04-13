@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_02r09hb" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="8e97625" camunda:diagramRelationId="7827a06b-1245-4fae-8668-399e000be498" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="Decision_1xuoniq" name="Approve Invoice?">
+    <decisionTable id="DecisionTable_1m2naek" hitPolicy="FIRST">
+      <input id="Input_1" label="invoiceValue">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>invoiceValue</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1hkkoxq" label="department">
+        <inputExpression id="LiteralExpression_03v1pqb" typeRef="string">
+          <text>department</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="approval" name="approval" typeRef="string" />
+      <rule id="DecisionRule_1u0ag0c">
+        <description>"The product team is not allowed to file invoices over 1.000 EUR using this process"</description>
+        <inputEntry id="UnaryTests_16qvj3z">
+          <text>&gt; 1000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hk3z2h">
+          <text>"product"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0l7echs">
+          <text>"rejected"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06vxea7">
+        <inputEntry id="UnaryTests_1eh17i2">
+          <text>&gt;= 300</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_136f73e">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06lnz6i">
+          <text>"manual"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08guy6e">
+        <inputEntry id="UnaryTests_0jewnn0">
+          <text>&lt; 300</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0n3ackn">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06g8qji">
+          <text>"auto"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1xuoniq">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

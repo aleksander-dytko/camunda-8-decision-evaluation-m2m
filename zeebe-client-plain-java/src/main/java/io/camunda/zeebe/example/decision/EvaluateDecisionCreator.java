@@ -9,6 +9,7 @@ package io.camunda.zeebe.example.decision;
 
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.ZeebeClientBuilder;
+import io.camunda.zeebe.client.api.response.DeploymentEvent;
 import io.camunda.zeebe.client.api.response.EvaluateDecisionResponse;
 
 public final class EvaluateDecisionCreator {
@@ -16,19 +17,27 @@ public final class EvaluateDecisionCreator {
   public static void main(final String[] args) {
     final String defaultAddress = "localhost:26500";
 
-    final ZeebeClientBuilder zeebeClientBuilder = ZeebeClient.newClientBuilder().credentialsProvider(new MyCredentialsProvider()).gatewayAddress(defaultAddress).usePlaintext();
+    //final ZeebeClientBuilder zeebeClientBuilder = ZeebeClient.newClientBuilder().credentialsProvider(new MyCredentialsProvider()).gatewayAddress(defaultAddress).usePlaintext();
 
-    final String decisionId = "Decision_1aredx7";
+    final ZeebeClientBuilder zeebeClientBuilder = ZeebeClient.newClientBuilder().gatewayAddress(defaultAddress).usePlaintext();
+
+    final String decisionId = "Decision_1xuoniq";
 
     System.out.println("Evaluating decision");
 
     try (final ZeebeClient client = zeebeClientBuilder.build()) {
 
+
+     //final DeploymentEvent deploymentEvent = client.newDeployResourceCommand().addResourceFromClasspath("decide-on-approval.dmn").send().join();
+
+      //System.out.println("Deployment created with key: " + deploymentEvent.getKey());
+
+
       final EvaluateDecisionResponse decisionEvaluation =
               client
                       .newEvaluateDecisionCommand()
                       .decisionId(decisionId)
-                      .variables("{\"name\": \"Olek\"}")
+                      .variables("{\"invoiceValue\":300,\"department\":\"IT\"}")
                       .send()
                       .join();
 
