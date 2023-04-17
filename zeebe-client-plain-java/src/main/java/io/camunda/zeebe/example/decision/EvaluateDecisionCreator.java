@@ -19,7 +19,26 @@ public final class EvaluateDecisionCreator {
 
   public static void main(final String[] args) {
     final String defaultAddress = "localhost:26500";
+    final String decisionId = "Decision_1xuoniq";
 
+    /*
+
+    // Connect to local deployment. Assumes that authentication is disabled.
+    final ZeebeClientBuilder zeebeClientBuilder = ZeebeClient.newClientBuilder().gatewayAddress(defaultAddress).usePlaintext();
+    final ZeebeClient client = zeebeClientBuilder.build();
+
+     */
+
+    /*
+
+    // Connect to local deployment with Bearer token in header. Assumes that authentication is enabled.
+    final ZeebeClientBuilder zeebeClientBuilder = ZeebeClient.newClientBuilder().credentialsProvider(new MyCredentialsProvider()).gatewayAddress(defaultAddress).usePlaintext();
+    final ZeebeClient client = zeebeClientBuilder.build();
+
+     */
+
+
+    // Connect to a local deployment with OAuthCredentialsProvider with Identity. Assumes authentication is enabled.
     final OAuthCredentialsProvider provider =
             new OAuthCredentialsProviderBuilder()
                     .clientId("zeebe")
@@ -30,29 +49,20 @@ public final class EvaluateDecisionCreator {
 
     final ZeebeClient client =
             new ZeebeClientBuilderImpl()
-                    .gatewayAddress("localhost:26500").usePlaintext()
+                    .gatewayAddress(defaultAddress).usePlaintext()
                     .credentialsProvider(provider)
                     .build();
 
+
     System.out.println(client.newTopologyRequest().send().join().toString());
 
-    //final ZeebeClientBuilder zeebeClientBuilder = ZeebeClient.newClientBuilder().credentialsProvider(new MyCredentialsProvider()).gatewayAddress(defaultAddress).usePlaintext();
+    System.out.println("Deploying decision definition");
 
-    /*
-    final ZeebeClientBuilder zeebeClientBuilder = ZeebeClient.newClientBuilder().gatewayAddress(defaultAddress).usePlaintext();
+     final DeploymentEvent deploymentEvent = client.newDeployResourceCommand().addResourceFromClasspath("decide-on-approval.dmn").send().join();
 
-    final String decisionId = "Decision_1xuoniq";
+     System.out.println("Deployment created with key: " + deploymentEvent.getKey());
 
     System.out.println("Evaluating decision");
-
-    try (final ZeebeClient client = zeebeClientBuilder.build()) {
-
-
-     //final DeploymentEvent deploymentEvent = client.newDeployResourceCommand().addResourceFromClasspath("decide-on-approval.dmn").send().join();
-
-      //System.out.println("Deployment created with key: " + deploymentEvent.getKey());
-
-
       final EvaluateDecisionResponse decisionEvaluation =
               client
                       .newEvaluateDecisionCommand()
@@ -63,9 +73,9 @@ public final class EvaluateDecisionCreator {
 
       System.out.println("Decision evaluation result: " + decisionEvaluation.getDecisionOutput());
 
-    }
 
-     */
+
+
     }
   }
 
