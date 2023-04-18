@@ -21,13 +21,13 @@ public final class EvaluateDecisionCreator {
     final String defaultAddress = "localhost:26500";
     final String decisionId = "Decision_1xuoniq";
 
-    /*
+
 
     // Connect to local deployment. Assumes that authentication is disabled.
     final ZeebeClientBuilder zeebeClientBuilder = ZeebeClient.newClientBuilder().gatewayAddress(defaultAddress).usePlaintext();
     final ZeebeClient client = zeebeClientBuilder.build();
 
-     */
+
 
     /*
 
@@ -38,6 +38,7 @@ public final class EvaluateDecisionCreator {
      */
 
 
+    /*
     // Connect to a local deployment with OAuthCredentialsProvider with Identity. Assumes authentication is enabled.
     final OAuthCredentialsProvider provider =
             new OAuthCredentialsProviderBuilder()
@@ -53,8 +54,10 @@ public final class EvaluateDecisionCreator {
                     .credentialsProvider(provider)
                     .build();
 
+     */
 
-    System.out.println(client.newTopologyRequest().send().join().toString());
+
+    System.out.println("Zeebe topology: " + client.newTopologyRequest().send().join().toString());
 
     System.out.println("Deploying decision definition");
 
